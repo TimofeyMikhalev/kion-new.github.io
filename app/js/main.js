@@ -195,7 +195,7 @@
 
             setTimeout(() => {
 
-                if (post__content.dataset.question >= variant.length - 28) {
+                if (post__content.dataset.question >= variant.length - 1) {
                     post__content.dataset.question = 0;
                     countOfAnswer = 0;
                 } else {
@@ -205,7 +205,6 @@
                 post__content.classList.remove("transition");
             }, 800);
 
-            // console.log(variant);
         }
 
 
@@ -218,57 +217,71 @@
         });
         // с помощью функции забираем дата атрибут кнопки и кэадем в массив
         function addAnswer(e) {
-            let selectedAnswer = e.currentTarget.dataset.result;
+            let selectedAnswer = e.currentTarget.dataset.answer;
             arr.push(selectedAnswer);
+            if (arr.length == 12) {
+                post_content.classList.add("result")
+                post_content.dataset.result = checkResult()
+            }
         };
 
-        function checkResult(){
+
+
+        //когда нужно узнать какой резуэьтат выдать // возвращает индекс выигрывшего резуэьтат
+        function checkResult() {
             let count_1 = 0, count_2 = 0, count_3 = 0, count_4 = 0;
             arr.forEach((item) => {
-          
-              if(item == "0"){
-               count_1++;
-              } else if(item == "1"){
-               count_2++;
-              } else if(item == "2"){
-               count_3++;
-              } else if(item == "3"){
-             count_4++;
-              }
+
+                if (item == "0") {
+                    count_1++;
+                } else if (item == "1") {
+                    count_2++;
+                } else if (item == "2") {
+                    count_3++;
+                } else if (item == "3") {
+                    count_4++;
+                }
             });
-          
-            if(count_1 > count_2 && count_1 > count_3 && count_1 > count_4){ //Если первый ответ больше, то возвращаем победивший индекс 0
-             return 0;
-            } else if(count_2 > count_1 && count_2 > count_3 && count_2 > count_4){  //Если вторых ответов больше, то возвращаем победивший индекс 1
-             return 1;
-            } else if(count_3 > count_1 && count_3 > count_2 && count_3 > count_4){  //Если третьих ответов больше, то возвращаем победивший индекс 2
-             return 2;
-            } else if(count_4 > count_1 && count_4 > count_2 && count_4 > count_3){  //Если четвертых ответов больше, то возвращаем победивший индекс 3
-             return 3;
+
+            if (count_1 > count_2 && count_1 > count_3 && count_1 > count_4) { //Если первый ответ больше, то возвращаем победивший индекс 0
+                return 0;
+            } else if (count_2 > count_1 && count_2 > count_3 && count_2 > count_4) {  //Если вторых ответов больше, то возвращаем победивший индекс 1
+                return 1;
+            } else if (count_3 > count_1 && count_3 > count_2 && count_3 > count_4) {  //Если третьих ответов больше, то возвращаем победивший индекс 2
+                return 2;
+            } else if (count_4 > count_1 && count_4 > count_2 && count_4 > count_3) {  //Если четвертых ответов больше, то возвращаем победивший индекс 3
+                return 3;
             } else {  //Если равное значение ответов или еще что-то то возращаем 3 ответ 
-             return 3;
+                return 3;
             }
-          }
+        }
 
-          console.log(arr);
-        // var scenes = document.querySelectorAll('.parallax__item');
-        // scenes.forEach((item) => {
-        //     new Parallax(item);
-        //     deviceType.isMobile();
-        // });
-        // var villa = document.querySelectorAll('.parallax__item2');
-        // villa.forEach((item) => {
-        //     new Parallax(item, {
-
-        //     });
-
-
-        //     deviceType.isMobile();
-        // });
+        console.log(total);
 
 
 
-        AOS.init();
+
+
+        var scenes = document.querySelectorAll('.parallax__item');
+        scenes.forEach((item) => {
+            new Parallax(item);
+            deviceType.isMobile();
+        });
+        var villa = document.querySelectorAll('.parallax__item2');
+        villa.forEach((item) => {
+            new Parallax(item, {
+
+            });
+
+
+            deviceType.isMobile();
+        });
+
+
+
+        AOS.init({
+
+        });
 
 
         //END
